@@ -1,8 +1,6 @@
-# ProjektArbeit
-
-## Projekt Arbeit von Robin Brang und Viktoria Heinen
+# Projekt Arbeit von Robin Brang und Viktoria Heinen
 
 
-![Grobkonzept_GitLab.png](./Grobkonzept_GitLab.png)
+![App-Konzept.png](./App-Konzept.png)
 
 
