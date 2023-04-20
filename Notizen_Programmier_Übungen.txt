@@ -1,0 +1,83 @@
+Neues Projekt anlegen Programmier Übungen 
+------------------------------------------------------------------------
+// Optimus
+-> Menu -> Groups -> Your Groups -> Ausbildung-SWE -> Viktoria-Heinen
+-> New Projekt 
+-> Create blank Projekt 
+-> enter Projekt Name      
+-> Create Projekt 
+-> Clone 
+-> copie SSH key 
+------------------------------------------------------------------------
+// Fork
+-> File
+-> Clone
+-> SSH in Repositrory Url kopieren 
+------------------------------------------------------------------------
+// IntelliJ
+-> File 
+-> Open..
+-> Projekt öffnen 
+
+
+IntelliJ Code in cmd ausführen
+
+-> Code schreiben 
+-> in IntelliJ run 
+-> Path (C:\......) kopieren 
+-> in cmd einfügen
+-> enter  
+
+Java to txt
+------------------------------------------------------------------------
+- Imports
+-> Reader 
+-> Writer 
+-> IOExeption 
+------------------------------------------------------------------------
+- Umgang mit Fehlern
+-> public static void main(String[] args) throws IOException {
+------------------------------------------------------------------------
+- File erstellen 
+-> FileReader reader = new FileReader("C:\\...);
+------------------------------------------------------------------------
+- File öffnen und schreibbereit machen 
+-> try {
+       FileWriter writer = new FileWriter("C:\\..., true);
+------------------------------------------------------------------------
+- Ausgabe schreiben
+-> writer.write(....)
+------------------------------------------------------------------------
+- File schließen 
+-> writer.close();
+------------------------------------------------------------------------
+- Statement beenden
+-> } catch (IOException e) {
+       e.printStackTrace();
+     }
+
+// https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+-> Daten in txt schreiben
+
+// https://www.happycoders.eu/de/java/dateinamen-verzeichnisnamen-konstruieren-file-path-paths/
+-> path in Variable speichern 
+
+// https://www.delftstack.com/de/howto/java/connect-mysql-database-in-java/#:~:text=herunterladen%20und%20installieren-,Erstellen%20Sie%20eine%20Datenbank%20in%20MySQL,Testen%20Sie%20die%20Verbindung
+-> Java in Datenbank einbinden
+
+-> pw:test
+
+// https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project
+-> jar Datei in Classpath einbinden
+
+// https://alvinalexander.com/java/java-mysql-insert-example-preparedstatement/
+-> Daten in Datenbank schreiben  
+
+// https://www.jetbrains.com/help/idea/javafx.html#create-project
+-> JavaFX in intelliJ
+
+------------------------------------------------------------------------
+
+// https://www.devbrain-it.de/hibernate-anbindung-an-einen-rest-service-java/
+// https://docs.jboss.org/hibernate/orm/6.1/quickstart/html_single/
+eventuell brauchbar für Anbindung Hibernate + Maven 
