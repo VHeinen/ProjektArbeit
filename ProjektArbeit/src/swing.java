@@ -17,7 +17,7 @@ public class swing {
 		unserFenster.setTitle("Notenübersicht");
 		unserFenster.setSize(600, 800);
 		JPanel pane = new JPanel();
-	    unserFenster.add(pane);
+	    	unserFenster.add(pane);
 		unserFenster.setVisible(true);
 	}
 }
