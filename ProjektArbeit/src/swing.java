@@ -29,17 +29,17 @@ public class swing {
 		Box footerBox = Box.createHorizontalBox();
 		JLabel exam = new JLabel("Klassenarbeit");
 		examBox.add(exam);
-		JLabel examGrade = new JLabel("Note");
+		JLabel examGrade = new JLabel("                             Note     ");
 		headlinesBox.add(examGrade);
 	    JTextField examGradeInputField = new JTextField("", 15);
         examGradeInputField.setForeground(Color.BLUE);
 	    examBox.add(examGradeInputField);
-		JLabel examWeighting = new JLabel("Gewichtung");
+		JLabel examWeighting = new JLabel("              Gewichtung              ");
 		headlinesBox.add(examWeighting);
 	    JTextField examWeightingInputField = new JTextField("", 15);
         examWeightingInputField.setForeground(Color.BLUE);
 	    examBox.add(examWeightingInputField);
-		JLabel examComment = new JLabel("Kommentar");
+		JLabel examComment = new JLabel("     Kommentar");
 		headlinesBox.add(examComment);
 	    JTextField examCommentInputField = new JTextField("", 15);
         examCommentInputField.setForeground(Color.BLUE);
@@ -55,28 +55,44 @@ public class swing {
         footerBox.add(buttonExams);
 		JLabel Epo = new JLabel("Epochalnote");
 		epoBox.add(Epo);
-	    JTextField EpoGradeInputField = new JTextField("", 15);
-        EpoGradeInputField.setForeground(Color.BLUE);
-	    epoBox.add(EpoGradeInputField);
-	    JTextField EpoWeightingInputField = new JTextField("", 15);
-        EpoWeightingInputField.setForeground(Color.BLUE);
-	    epoBox.add(EpoWeightingInputField);
-	    JTextField EpoCommentInputField = new JTextField("", 15);
-        EpoCommentInputField.setForeground(Color.BLUE);
-	    epoBox.add(EpoCommentInputField);
-        JButton buttonEpos = new JButton("Klassenarbeit speichern");
-		JLabel Other = new JLabel("Klassenarbeit");
-		otherBox.add(Other);
-	    JTextField OtherGradeInputField = new JTextField("", 15);
-        OtherGradeInputField.setForeground(Color.BLUE);
-	    otherBox.add(OtherGradeInputField);
-	    JTextField OtherWeightingInputField = new JTextField("", 15);
-        OtherWeightingInputField.setForeground(Color.BLUE);
-	    otherBox.add(OtherWeightingInputField);
-	    JTextField OtherCommentInputField = new JTextField("", 15);
-        OtherCommentInputField.setForeground(Color.BLUE);
-	    otherBox.add(OtherCommentInputField);
-        JButton buttonOthers = new JButton("Klassenarbeit speichern");
+	    JTextField epoGradeInputField = new JTextField("", 15);
+        epoGradeInputField.setForeground(Color.BLUE);
+	    epoBox.add(epoGradeInputField);
+	    JTextField epoWeightingInputField = new JTextField("", 15);
+        epoWeightingInputField.setForeground(Color.BLUE);
+	    epoBox.add(epoWeightingInputField);
+	    JTextField epoCommentInputField = new JTextField("", 15);
+        epoCommentInputField.setForeground(Color.BLUE);
+	    epoBox.add(epoCommentInputField);
+        JButton buttonEpos = new JButton("Epochalnote speichern");
+        buttonEpos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("Text = " + epoGradeInputField.getText()
+            		  					 + " " + epoWeightingInputField.getText()
+            		  					 + " " +epoCommentInputField.getText());
+            }
+          });
+        footerBox.add(buttonEpos);
+		JLabel other = new JLabel("andere Note");
+		otherBox.add(other);
+	    JTextField otherGradeInputField = new JTextField("", 15);
+        otherGradeInputField.setForeground(Color.BLUE);
+	    otherBox.add(otherGradeInputField);
+	    JTextField otherWeightingInputField = new JTextField("", 15);
+        otherWeightingInputField.setForeground(Color.BLUE);
+	    otherBox.add(otherWeightingInputField);
+	    JTextField otherCommentInputField = new JTextField("", 15);
+        otherCommentInputField.setForeground(Color.BLUE);
+	    otherBox.add(otherCommentInputField);
+        JButton buttonOthers = new JButton("andere Note speichern");
+        buttonOthers.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("Text = " + otherGradeInputField.getText()
+            		  					 + " " + otherWeightingInputField.getText()
+            		  					 + " " +otherCommentInputField.getText());
+            }
+          });
+        footerBox.add(buttonOthers);
         vert.add(headlinesBox);
         vert.add(examBox);
         vert.add(epoBox);
