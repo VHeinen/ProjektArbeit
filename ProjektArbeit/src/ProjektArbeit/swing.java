@@ -33,11 +33,43 @@ public class swing {
 		
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
+		Box dropdownClassBox = Box.createHorizontalBox();
+		Box dropdownStudentsBox = Box.createHorizontalBox();
 		Box headlinesBox = Box.createHorizontalBox();
 		Box examBox = Box.createHorizontalBox();
 		Box epoBox = Box.createHorizontalBox();
 		Box otherBox = Box.createHorizontalBox();
 		Box footerBox = Box.createHorizontalBox();
+		
+		//Dropdownmenu Klassen
+		String[] choicesClasses = { "keine Klasse gewählt", "Klasse 1", "Klasse 2", "Klasse 3" }; //TODO: Array mit select auf DB füllen
+		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse aus und klicke OK");
+		dropdownClassBox.add(dropdownClassLabel);
+		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
+		dropdownClassBox.add(dropdownClassCB);
+		JButton buttonDropdownClass = new JButton("OK");
+		buttonDropdownClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("DropDownClass wurde gewählt");
+				//TODO: Klassen Variable setzen um später Schüler Dropdown Menu Array zu füllen, oder direkt füllen
+			}
+		});
+		dropdownClassBox.add(buttonDropdownClass);
+		
+		//Dropdownmenu Schüler
+		String[] choicesStudents = { "kein Schüler gewählt", "Schüler 1", "Schüler 2", "Schüler3" }; //TODO: Array je nach Klasse füllen
+		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK");
+		dropdownStudentsBox.add(dropdownStudentsLabel);
+		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
+		dropdownStudentsBox.add(dropdownStudentsCB);
+		JButton buttonDropdownStudents = new JButton("OK");
+		buttonDropdownStudents.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("DropDownStudents wurde gewählt");
+				//TODO: Schüler Variable setzen die später bei den DB Updates genutzt werden kann
+			}
+		});
+		dropdownStudentsBox.add(buttonDropdownStudents);
 		
 		//Klassenarbeitsabschnitt
 		JLabel exam = new JLabel("Klassenarbeit:  ");
@@ -121,6 +153,8 @@ public class swing {
 		footerBox.add(buttonOthers);
 		
 		//Boxen anordnen
+		vert.add(dropdownClassBox);
+		vert.add(dropdownStudentsBox);
 		vert.add(headlinesBox);
 		vert.add(examBox);
 		vert.add(epoBox);
