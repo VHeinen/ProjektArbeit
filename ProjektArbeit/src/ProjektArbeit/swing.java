@@ -34,6 +34,7 @@ public class swing {
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
 		Box dropdownClassBox = Box.createHorizontalBox();
+		Box dropdownSubjectBox = Box.createHorizontalBox();
 		Box dropdownStudentsBox = Box.createHorizontalBox();
 		Box headlinesBox = Box.createHorizontalBox();
 		Box examBox = Box.createHorizontalBox();
@@ -43,7 +44,7 @@ public class swing {
 		
 		//Dropdownmenu Klassen
 		String[] choicesClasses = { "keine Klasse gewählt", "Klasse 1", "Klasse 2", "Klasse 3" }; //TODO: Array mit select auf DB füllen
-		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse aus und klicke OK");
+		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse aus und klicke OK ");
 		dropdownClassBox.add(dropdownClassLabel);
 		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
 		dropdownClassBox.add(dropdownClassCB);
@@ -51,14 +52,31 @@ public class swing {
 		buttonDropdownClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownClass wurde gewählt");
-				//TODO: Klassen Variable setzen um später Schüler Dropdown Menu Array zu füllen, oder direkt füllen
+				//TODO: Klassen Variable setzen um später Schüler/Fächer Dropdown Menu Array zu füllen, oder direkt füllen
+				// Notenart an Klasse fest machen -> Dropdown Menu 1+ bis 6 ODER eingabefenster Integer
 			}
 		});
 		dropdownClassBox.add(buttonDropdownClass);
 		
+		//Dropdownmenu Fächer
+		String[] choicesSubject = { "kein Fach gewählt", "Fach 1", "Fach 2", "Fach 3" }; //TODO: Array je nach Klasse füllen
+		JLabel dropdownSubjectLabel = new JLabel("Wähle ein Fach aus und klicke OK ");
+		dropdownSubjectBox.add(dropdownSubjectLabel);
+		final JComboBox<String> dropdownSubjectCB = new JComboBox<String>(choicesSubject);
+		dropdownSubjectBox.add(dropdownSubjectCB);
+		JButton buttonDropdownSubject = new JButton("OK");
+		buttonDropdownSubject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("DropDownSubject wurde gewählt");
+				//TODO: Fach Variable setzen, die später bei den DB Updates genutzt werden kann
+			}
+		});
+		dropdownSubjectBox.add(buttonDropdownSubject);
+		
+		
 		//Dropdownmenu Schüler
 		String[] choicesStudents = { "kein Schüler gewählt", "Schüler 1", "Schüler 2", "Schüler3" }; //TODO: Array je nach Klasse füllen
-		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK");
+		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK ");
 		dropdownStudentsBox.add(dropdownStudentsLabel);
 		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
 		dropdownStudentsBox.add(dropdownStudentsCB);
@@ -66,7 +84,7 @@ public class swing {
 		buttonDropdownStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
-				//TODO: Schüler Variable setzen die später bei den DB Updates genutzt werden kann
+				//TODO: Schüler Variable setzen, die später bei den DB Updates genutzt werden kann
 			}
 		});
 		dropdownStudentsBox.add(buttonDropdownStudents);
@@ -152,8 +170,12 @@ public class swing {
 		});
 		footerBox.add(buttonOthers);
 		
+		//TODO: Derzeitige Durchschnittsnote anzeigen
+		//TODO: Zeugnis Ausgabe Button
+		
 		//Boxen anordnen
 		vert.add(dropdownClassBox);
+		vert.add(dropdownSubjectBox);
 		vert.add(dropdownStudentsBox);
 		vert.add(headlinesBox);
 		vert.add(examBox);
