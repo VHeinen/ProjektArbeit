@@ -106,12 +106,12 @@ public class swing {
 		});
 		footerBox.add(buttonOthers);
 		vert.add(headlinesBox);
-        vert.add(examBox);
-        vert.add(epoBox);
-        vert.add(otherBox);
-        vert.add(footerBox);
-        pane.add(vert);
-	    window.add(pane);
+		vert.add(examBox);
+		vert.add(epoBox);
+		vert.add(otherBox);
+		vert.add(footerBox);
+		pane.add(vert);
+		window.add(pane);
 		window.setVisible(true);
 	}
 }
