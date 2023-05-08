@@ -15,6 +15,10 @@ public class swing {
 	
 	private static JFrame window;
 	private static JLabel label;
+	private static String currentGrade;
+	private static String schoolClass;
+	private static String subject;
+	private static String pupil;
 	
 	public static void main(String[] args) {
 		//JFrame erstellen, Button+Logik inklusive
@@ -27,9 +31,8 @@ public class swing {
 		window = new JFrame();
 		window.setTitle("Notenübersicht");
 		window.setSize(1080, 1920);
-		
-		//JPanel erstellen
 		JPanel pane = new JPanel();
+		JLabel currentGradeLabel = new JLabel();
 		
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
@@ -43,7 +46,7 @@ public class swing {
 		Box footerBox = Box.createHorizontalBox();
 		
 		//Dropdownmenu Klassen
-		String[] choicesClasses = { "keine Klasse gewählt", "Klasse 1", "Klasse 2", "Klasse 3" }; //TODO: Array mit select auf DB füllen
+		String[] choicesClasses = { "keine Klasse gewählt", "22a", "22b", "22c" }; //TODO: Array mit select auf DB füllen
 		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse aus und klicke OK ");
 		dropdownClassBox.add(dropdownClassLabel);
 		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
@@ -52,14 +55,14 @@ public class swing {
 		buttonDropdownClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownClass wurde gewählt");
-				//TODO: Klassen Variable setzen um später Schüler/Fächer Dropdown Menu Array zu füllen, oder direkt füllen
-				// Notenart an Klasse fest machen -> Dropdown Menu 1+ bis 6 ODER eingabefenster Integer
+				initSchoolClass(dropdownClassCB);
+				//TODO Notenart an Klasse fest machen -> Dropdown Menu 1+ bis 6 ODER eingabefenster Integer
 			}
 		});
 		dropdownClassBox.add(buttonDropdownClass);
 		
 		//Dropdownmenu Fächer
-		String[] choicesSubject = { "kein Fach gewählt", "Fach 1", "Fach 2", "Fach 3" }; //TODO: Array je nach Klasse füllen
+		String[] choicesSubject = { "kein Fach gewählt", "LF1", "LF2", "LF3", "LF4", "LF5", "Religion", "Sozialkunde" }; //TODO: Array je nach Klasse füllen
 		JLabel dropdownSubjectLabel = new JLabel("Wähle ein Fach aus und klicke OK ");
 		dropdownSubjectBox.add(dropdownSubjectLabel);
 		final JComboBox<String> dropdownSubjectCB = new JComboBox<String>(choicesSubject);
@@ -68,14 +71,14 @@ public class swing {
 		buttonDropdownSubject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownSubject wurde gewählt");
-				//TODO: Fach Variable setzen, die später bei den DB Updates genutzt werden kann
+				initSubject(dropdownSubjectCB);
 			}
 		});
 		dropdownSubjectBox.add(buttonDropdownSubject);
 		
 		
 		//Dropdownmenu Schüler
-		String[] choicesStudents = { "kein Schüler gewählt", "Schüler 1", "Schüler 2", "Schüler3" }; //TODO: Array je nach Klasse füllen
+		String[] choicesStudents = { "kein Schüler gewählt", "Robin Brang", "Viktoria Heinen", "Dominik" }; //TODO: Array je nach Klasse mit select füllen
 		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK ");
 		dropdownStudentsBox.add(dropdownStudentsLabel);
 		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
@@ -84,7 +87,9 @@ public class swing {
 		buttonDropdownStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
-				//TODO: Schüler Variable setzen, die später bei den DB Updates genutzt werden kann
+				initStudent(dropdownStudentsCB);
+				currentGrade = calculateCurrentGrade(pupil);
+				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		dropdownStudentsBox.add(buttonDropdownStudents);
@@ -116,6 +121,8 @@ public class swing {
 				float weightingToken = Float.parseFloat(examWeightingInputField.getText());
 				String commentToken = examCommentInputField.getText();
 				//TODO: DB Update Tokens
+				currentGrade = calculateCurrentGrade(pupil);
+				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		footerBox.add(buttonExams);
@@ -141,6 +148,8 @@ public class swing {
 				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
 				//TODO: DB Update Tokens
+				currentGrade = calculateCurrentGrade(pupil);
+				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		footerBox.add(buttonEpos);
@@ -166,11 +175,12 @@ public class swing {
 				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
 				//TODO: DB Update Tokens
+				currentGrade = calculateCurrentGrade(pupil);
+				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		footerBox.add(buttonOthers);
 		
-		//TODO: Derzeitige Durchschnittsnote anzeigen
 		//TODO: Zeugnis Ausgabe Button
 		
 		//Boxen anordnen
@@ -182,6 +192,7 @@ public class swing {
 		vert.add(epoBox);
 		vert.add(otherBox);
 		vert.add(footerBox);
+		vert.add(currentGradeLabel);
 		pane.add(vert);
 		
 		//JFrame fertigmachen
@@ -190,4 +201,31 @@ public class swing {
 		
 		return(window);
 	}
+	
+	public static String calculateCurrentGrade(String pupil) {
+		int gradeCount = 5; //TODO select count -> wie viele noten sind eingetragen
+		double grade = 0.0; double gradeToken;
+		int weighting;
+		for(int i = 0; i < gradeCount; i++) {
+			gradeToken = 7+i; //TODO select grade(i) eventuell for schleife durch select schleife ersetzen
+			weighting = 20; //TODO select
+			grade = grade + gradeToken * weighting;
+		}
+		grade = grade / 100;
+		String ret = pupil + " aus der " + schoolClass + " hat derzeit eine " + grade + " in " + subject;
+		return(ret);
+	}
+	
+	public static void initStudent(JComboBox dropdownStudentsCB) {
+		pupil = (String)dropdownStudentsCB.getSelectedItem();
+	}
+	
+	public static void initSubject(JComboBox dropdownSubjectCB) {
+		subject = (String)dropdownSubjectCB.getSelectedItem();
+	}
+	
+	public static void initSchoolClass(JComboBox dropdownClassesCB) {
+		schoolClass = (String)dropdownClassesCB.getSelectedItem();
+	}
+	
 }
