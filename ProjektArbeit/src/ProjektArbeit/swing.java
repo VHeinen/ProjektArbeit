@@ -53,7 +53,7 @@ public class swing {
 		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
 		dropdownClassBox.add(dropdownClassCB);
 		JButton buttonDropdownClass = new JButton("OK");
-		buttonDropdownClass.addActionListener(new ActionListener() {
+		buttonDropdownClass.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownClass wurde gewählt");
 				initSchoolClass(dropdownClassCB);
@@ -69,7 +69,7 @@ public class swing {
 		final JComboBox<String> dropdownSubjectCB = new JComboBox<String>(choicesSubject);
 		dropdownSubjectBox.add(dropdownSubjectCB);
 		JButton buttonDropdownSubject = new JButton("OK");
-		buttonDropdownSubject.addActionListener(new ActionListener() {
+		buttonDropdownSubject.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownSubject wurde gewählt");
 				initSubject(dropdownSubjectCB);
@@ -85,7 +85,7 @@ public class swing {
 		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
 		dropdownStudentsBox.add(dropdownStudentsCB);
 		JButton buttonDropdownStudents = new JButton("OK");
-		buttonDropdownStudents.addActionListener(new ActionListener() {
+		buttonDropdownStudents.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
 				initStudent(dropdownStudentsCB);
