@@ -33,17 +33,18 @@ public class swing {
 		window.setSize(1080, 1920);
 		JPanel pane = new JPanel();
 		JLabel currentGradeLabel = new JLabel();
+		JLabel puffer1 = new JLabel(" "); JLabel puffer2 = new JLabel(" "); JLabel puffer3 = new JLabel(" "); JLabel puffer4 = new JLabel(" ");
 		
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
 		Box dropdownClassBox = Box.createHorizontalBox();
 		Box dropdownSubjectBox = Box.createHorizontalBox();
 		Box dropdownStudentsBox = Box.createHorizontalBox();
-		Box headlinesBox = Box.createHorizontalBox();
 		Box examBox = Box.createHorizontalBox();
 		Box epoBox = Box.createHorizontalBox();
 		Box otherBox = Box.createHorizontalBox();
 		Box footerBox = Box.createHorizontalBox();
+		Box statisticsButtonsBox = Box.createHorizontalBox();
 		
 		//Dropdownmenu Klassen
 		String[] choicesClasses = { "keine Klasse gewählt", "22a", "22b", "22c" }; //TODO: Array mit select auf DB füllen
@@ -94,21 +95,18 @@ public class swing {
 		});
 		dropdownStudentsBox.add(buttonDropdownStudents);
 		
+		//Überschriftenabschnitt
+		JLabel headlines = new JLabel("Note                                                                                     Gewichtung                                                                  Kommentar                                             ");
+		
 		//Klassenarbeitsabschnitt
 		JLabel exam = new JLabel("Klassenarbeit:  ");
 		examBox.add(exam);
-		JLabel examGrade = new JLabel("                             Note                   ");
-		headlinesBox.add(examGrade);
 		JTextField examGradeInputField = new JTextField("", 15);
 		examGradeInputField.setForeground(Color.BLUE);
 		examBox.add(examGradeInputField);
-		JLabel examWeighting = new JLabel("              Gewichtung                      ");
-		headlinesBox.add(examWeighting);
 		JTextField examWeightingInputField = new JTextField("", 15);
 		examWeightingInputField.setForeground(Color.BLUE);
 		examBox.add(examWeightingInputField);
-		JLabel examComment = new JLabel("           Kommentar");
-		headlinesBox.add(examComment);
 		JTextField examCommentInputField = new JTextField("", 15);
 		examCommentInputField.setForeground(Color.BLUE);
 		examBox.add(examCommentInputField);
@@ -120,7 +118,7 @@ public class swing {
 				String gradeToken = examGradeInputField.getText();
 				float weightingToken = Float.parseFloat(examWeightingInputField.getText());
 				String commentToken = examCommentInputField.getText();
-				//TODO: DB Update Tokens
+				dbUpdateGrade(gradeToken, weightingToken, commentToken);
 				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
@@ -147,7 +145,7 @@ public class swing {
 				String gradeToken = epoGradeInputField.getText();
 				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
-				//TODO: DB Update Tokens
+				dbUpdateGrade(gradeToken, weightingToken, commentToken);
 				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
@@ -174,25 +172,46 @@ public class swing {
 				String gradeToken = epoGradeInputField.getText();
 				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
-				//TODO: DB Update Tokens
+				dbUpdateGrade(gradeToken, weightingToken, commentToken);
 				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		footerBox.add(buttonOthers);
 		
+		//TODO: Notenausgabe Button
+		JButton buttonShowGrades = new JButton("alle Noten mitsamt Gewichtung und Kommentaren anzeigen");
+		buttonShowGrades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: select auf alle nötigen Infos machen, alles in einen String packen, den String in ein Label packen und das Label ganz unten in die Vert Box hängen
+			}
+		});
+		statisticsButtonsBox.add(buttonShowGrades);
+		
 		//TODO: Zeugnis Ausgabe Button
+		JButton buttonPrintCertificate = new JButton("Zeugnis ausgeben");
+		buttonPrintCertificate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: selecte alle Infos aus der Datenbank anhand von pupil und erstelle eine hübsche PDF-Datei 
+			}
+		});
+		statisticsButtonsBox.add(buttonPrintCertificate);
 		
 		//Boxen anordnen
 		vert.add(dropdownClassBox);
 		vert.add(dropdownSubjectBox);
 		vert.add(dropdownStudentsBox);
-		vert.add(headlinesBox);
+		vert.add(puffer1);
+		vert.add(headlines);
 		vert.add(examBox);
 		vert.add(epoBox);
 		vert.add(otherBox);
+		vert.add(puffer2);
 		vert.add(footerBox);
+		vert.add(puffer3);
 		vert.add(currentGradeLabel);
+		vert.add(puffer4);
+		vert.add(statisticsButtonsBox);
 		pane.add(vert);
 		
 		//JFrame fertigmachen
@@ -205,14 +224,14 @@ public class swing {
 	public static String calculateCurrentGrade(String pupil) {
 		int gradeCount = 5; //TODO select count -> wie viele noten sind eingetragen
 		double grade = 0.0; double gradeToken;
-		int weighting;
+		int weighting, length;
 		for(int i = 0; i < gradeCount; i++) {
-			gradeToken = 7+i; //TODO select grade(i) eventuell for schleife durch select schleife ersetzen
+			gradeToken = 12; //TODO select grade(i) eventuell for schleife durch select schleife ersetzen
 			weighting = 20; //TODO select
 			grade = grade + gradeToken * weighting;
 		}
 		grade = grade / 100;
-		String ret = pupil + " aus der " + schoolClass + " hat derzeit eine " + grade + " in " + subject;
+		String ret = pupil + " aus der " + schoolClass + " hat derzeit " + grade + " Punkte in " + subject;
 		return(ret);
 	}
 	
@@ -226,6 +245,11 @@ public class swing {
 	
 	public static void initSchoolClass(JComboBox dropdownClassesCB) {
 		schoolClass = (String)dropdownClassesCB.getSelectedItem();
+	}
+	
+	public static void dbUpdateGrade(String grade, float weighting, String comment) {
+		//TODO: Notenumwandlung (1- -> 13 etc.)
+		//TODO: DB Update Tokens
 	}
 	
 }
