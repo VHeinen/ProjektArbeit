@@ -1,4 +1,5 @@
 Trello: https://trello.com/b/gwa6QK89/lf5-it-22a-java-notenverwaltung
+MySql Workspace: C:\ProgramData\MySQL\MySQL Server 8.0\Data -> ist ein versteckter Ordner 
 
 Java Swing Infos: https://www.javatpoint.com/java-swing
 Eclipse Datei in Classpath: https://praxistipps.chip.de/classpath-in-eclipse-setzen-so-gehts_98052
