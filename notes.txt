@@ -1,3 +1,5 @@
+Projekt Abgabe: Sonnatg 11.06!!!!
+
 Trello: https://trello.com/b/gwa6QK89/lf5-it-22a-java-notenverwaltung
 MySql Workspace: C:\ProgramData\MySQL\MySQL Server 8.0\Data -> ist ein versteckter Ordner 
 
