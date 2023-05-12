@@ -3,7 +3,9 @@ package ProjektArbeit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 public class database {
@@ -21,7 +23,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -54,7 +56,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -87,7 +89,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -118,7 +120,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -153,7 +155,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -182,7 +184,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -213,7 +215,7 @@ public class database {
 		
 		try
 	      {
-	        Connection conn = connection(myDriver, url, user, pw);
+	        Connection conn = connectToDatabase(myDriver, url, user, pw);
 
 	        PreparedStatement preparedStm = conn.prepareStatement(sql);
 
@@ -238,12 +240,29 @@ public class database {
 	
 	
 	
-		  public static Connection connection(String myDriver, String url, String user, String pw) throws ClassNotFoundException, SQLException {
+	public static ResultSet getDataFromDatabase(String query) throws ClassNotFoundException, SQLException {
+		
+		
+		Connection conn = connectToDatabase(myDriver, url, user, pw);
+		
+		Statement stm = conn.createStatement();
+		ResultSet resultS = stm.executeQuery(query);
+		
+		resultS.close();
+		stm.close();
+		
+		
+		return resultS;
+		
+	}
+	
+	
+	
+	public static Connection connectToDatabase(String myDriver, String url, String user, String pw) throws ClassNotFoundException, SQLException {
 
 	      Class.forName(myDriver);
 	      Connection conn = DriverManager.getConnection(url, user, pw);
-
-	      System.out.println("--Database Connected--");
+	      
 
 	      return conn;
 
