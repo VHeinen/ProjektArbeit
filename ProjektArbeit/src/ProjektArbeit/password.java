@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.io.*;
-import java.sql.SQLException;
 import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.*;
@@ -20,6 +19,9 @@ import java.sql.SQLException;
 
 
 public class password {
+	
+	public static String usernameEntry;
+	public static String passwordEntry;
 
 	public static void main(String[] args)throws ClassNotFoundException, SQLException {
 		
@@ -45,8 +47,8 @@ public class password {
 		button.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				
-				String usernameEntry = charToString(username.getPassword());
-				String passwordEntry = charToString(password.getPassword());
+				usernameEntry = charToString(username.getPassword());
+				passwordEntry = charToString(password.getPassword());
 				
 				try {
 					String[] resultArr = database.getDataFromDatabase("select username, password from teachermanagement where password = passwordEntry and username = usernameEntry", 2);
