@@ -9,19 +9,19 @@ public class test {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 
-	// How to inserate in database
+//		How to insert in database
 		
-		//database.writePupilInDatabase(2, "TestUser", "TestUser", 0);
+//		database.writePupilInDatabase(2, "TestUser", "TestUser", 0);
 //		database.writeTeacherInDatabase(1, "bla", "bla", 0, 2, 3);
-//	database.writeSchoolclassInDatabase(1, "1a", 0);
+//		database.writeSchoolclassInDatabase(1, "1a", 0);
 //		database.writeSubjectInDatabase(1, "Englisch");
 //		database.writeGradeInDatabase(1, 5, 1.3f, "Test", Date.valueOf("2023-05-25"), 0, 0, 0);
 //		database.writeTeacherInDatabase(2, "TestUser", "TestUser", 0, 0, 0);
 //		database.writeSchoolclassInDatabase(2, "4c", 0);
 //		database.writeSubjectInDatabase(2, "Deutsch");
 //		database.writeGradeInDatabase(2, 3, 1.3f, "Test", date, 0, 0, 0);
-	//	database.writePupilManagementInDatabase(1, "test", "null", 1);
-		//database.writeTeacherManagementInDatabase(1, "null", "null", 1);
+//		database.writePupilManagementInDatabase(1, "test", "null", 1);
+//		database.writeTeacherManagementInDatabase(1, "null", "null", 1);
 	
 //		database.writeSubjectInDatabase(4, "Deutsch");
 //		database.writeSubjectInDatabase(5, "Mathe");
@@ -65,15 +65,15 @@ public class test {
 //		database.writePupilInDatabase(13, "Exe", "NotFound", 2);
 //		database.writePupilInDatabase(, "", "", );
 		
-		// How to get data from database
+//		How to get data from database
 	
 //		String[] resultArr = database.getDataFromDatabase("select * from pupil where id = 4", 4);
 //		for (String elements : resultArr) {
 //			System.out.println(elements);
 //		}
 		
-		//String query = "select * from teacher where id = 0 and lastName = 'Test'";
-		//String[] test = database.getDataFromDatabase(query, 6);
+//		String query = "select * from teacher where id = 0 and lastName = 'Test'";
+//		String[] test = database.getDataFromDatabase(query, 6);
 		
 //		String[] test = database.getDataFromDatabase(Queries.getAllDataFromPupilByID(1), 4);
 		String[] test = database.getDataFromDatabase(queries.getAllDataFromPupilByFirstName("Test"), 4);
