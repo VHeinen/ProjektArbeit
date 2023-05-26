@@ -20,8 +20,8 @@ import java.sql.SQLException;
 
 public class password {
 	
-	public static String usernameEntry;
-	public static String passwordEntry;
+	public static boolean 	teacher;
+	public static int		userID;
 
 	public static void main(String[] args)throws ClassNotFoundException, SQLException {
 		
@@ -47,18 +47,34 @@ public class password {
 		button.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				
+				String usernameEntry;
+				String passwordEntry;
+				
 				usernameEntry = charToString(username.getPassword());
 				passwordEntry = charToString(password.getPassword());
 				
-				String test = "select userName, passwort from teachermanagement where passwort = '" + passwordEntry + "' and userName = '" + usernameEntry + "'";
+				String teacherQuery = "select userName, passwort, teachID from teachermanagement where passwort = '" + passwordEntry + "' and userName = '" + usernameEntry + "'";
+				String pupilQuery = "select userName, passwort, pupilID from pupilmanagement where passwort = '" + passwordEntry + "' and userName = '" + usernameEntry + "'";
 				
 				try {
-					String[] resultArr = database.getDataFromDatabase(test, 2);
-					if(resultArr[0] != null && resultArr[1] != null) {
-						swing.main(args);
+					String[] teacherArr = database.getDataFromDatabase(teacherQuery, 2);
+					String[] pupilArr = database.getDataFromDatabase(pupilQuery, 2);
+					if(teacherArr[0] != null && teacherArr[1] != null) {
+						teacher = true;
+						userID = Integer.parseInt(teacherArr[2]);
+						swing.main(args, teacher, userID);
 						passwordWindow.dispose();
 					}
-					System.out.println("Username oder Passwort falsch");
+					else if(pupilArr[0] != null && pupilArr[1] != null) {
+						teacher = false;
+						userID = Integer.parseInt(pupilArr[2]);
+						pupil.main(args, teacher, userID);
+						passwordWindow.dispose();
+					}
+					else {
+						teacher = false;
+						System.out.println("Username oder Passwort falsch");
+					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}
