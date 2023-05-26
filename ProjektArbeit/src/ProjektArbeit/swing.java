@@ -2,6 +2,7 @@ package ProjektArbeit;
 
 import java.awt.Color;
 import java.io.*;
+import java.sql.SQLException;
 import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.*;
@@ -20,12 +21,12 @@ public class swing {
 	private static String subject;
 	private static String pupil;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args, boolean teacher, int userID) throws ClassNotFoundException, SQLException {
 		//JFrame erstellen, Button+Logik inklusive
-		window = buildJFrame();
+		window = buildJFrame(teacher, userID);
 	}
 	
-	public static JFrame buildJFrame() {
+	public static JFrame buildJFrame(boolean teacher, int userID) throws ClassNotFoundException, SQLException {
 		
 		//JFrame aufbauen
 		window = new JFrame();
@@ -50,13 +51,13 @@ public class swing {
 		Box statisticsButtonsBox = Box.createHorizontalBox();
 		
 		//Dropdownmenu Klassen
-		String[] choicesClasses = { "keine Klasse gewählt", "22a", "22b", "22c" }; //TODO: Array mit select auf DB füllen
-		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse aus und klicke OK ");
+		String[] choicesClasses = queries.getNamesFromSchoolClass();
+		JLabel dropdownClassLabel = new JLabel("Wähle eine Klasse ");
 		dropdownClassBox.add(dropdownClassLabel);
 		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
 		dropdownClassBox.add(dropdownClassCB);
 		JButton buttonDropdownClass = new JButton("OK");
-		buttonDropdownClass.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
+		buttonDropdownClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownClass wurde gewählt");
 				initSchoolClass(dropdownClassCB);
@@ -66,13 +67,13 @@ public class swing {
 		dropdownClassBox.add(buttonDropdownClass);
 		
 		//Dropdownmenu Fächer
-		String[] choicesSubject = { "kein Fach gewählt", "LF1", "LF2", "LF3", "LF4", "LF5", "Religion", "Sozialkunde" }; //TODO: Array je nach Klasse füllen
-		JLabel dropdownSubjectLabel = new JLabel("Wähle ein Fach aus und klicke OK ");
+		String[] choicesSubject = queries.getSubjectNamesByTeacherID(userID);
+		JLabel dropdownSubjectLabel = new JLabel("Wähle ein Fach aus ");
 		dropdownSubjectBox.add(dropdownSubjectLabel);
 		final JComboBox<String> dropdownSubjectCB = new JComboBox<String>(choicesSubject);
 		dropdownSubjectBox.add(dropdownSubjectCB);
 		JButton buttonDropdownSubject = new JButton("OK");
-		buttonDropdownSubject.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
+		buttonDropdownSubject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownSubject wurde gewählt");
 				initSubject(dropdownSubjectCB);
@@ -82,13 +83,13 @@ public class swing {
 		
 		
 		//Dropdownmenu Schüler
-		String[] choicesStudents = { "kein Schüler gewählt", "Robin Brang", "Viktoria Heinen", "Dominik" }; //TODO: Array je nach Klasse mit select füllen
+		String[] choicesStudents = queries.getPupilsFromPupilByClassID(schoolClass);
 		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK ");
 		dropdownStudentsBox.add(dropdownStudentsLabel);
 		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
 		dropdownStudentsBox.add(dropdownStudentsCB);
 		JButton buttonDropdownStudents = new JButton("OK");
-		buttonDropdownStudents.addActionListener(new ActionListener() { //TODO: button durch eventlistener zur combo box ersetzen
+		buttonDropdownStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
 				initStudent(dropdownStudentsCB);
@@ -254,5 +255,4 @@ public class swing {
 		//TODO: Notenumwandlung (1- -> 13 etc.)
 		//TODO: DB Update Tokens
 	}
-	
 }
