@@ -5,3 +5,5 @@ MySql Workspace: C:\ProgramData\MySQL\MySQL Server 8.0\Data -> ist ein versteckt
 
 Java Swing Infos: https://www.javatpoint.com/java-swing
 Eclipse Datei in Classpath: https://praxistipps.chip.de/classpath-in-eclipse-setzen-so-gehts_98052
+
+Download .jar for pdf: https://releases.aspose.com/pdf/java/23-5/#package-explorer 
