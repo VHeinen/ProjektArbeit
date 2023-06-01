@@ -12,3 +12,10 @@ Download .jar for pdf: https://releases.aspose.com/pdf/java/23-5/#package-explor
 pdf Docus:
 - https://blog.aspose.com/de/pdf/create-pdf-files-in-java/
 - https://docs.aspose.com/pdf/java/basics-of-dom-api/
+
+
+
+Weitere Ideen - Umsetzungen:
+- Weighting anpassen!
+- Klassenlehrer pro Klassen zuweisen?
+- Schüler-/Lehrer-Sicht
