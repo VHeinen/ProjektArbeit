@@ -1,4 +1,4 @@
-# Projekt Arbeit von Robin Brang und Viktoria Heinen
+# Projektarbeit von Robin Brang und Viktoria Heinen
 
 ### Agenda 
 - Backend
