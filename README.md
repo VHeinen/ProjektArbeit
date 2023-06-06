@@ -12,7 +12,7 @@
 
 ### Backend
 Im Hintergrund unserer Notenverwaltung steht eine MySQL Datenbank. Dort werden alle Daten hinterlegt und abgespeichert. 
-Als Schnittstelle an die Datenbank fungiert das Backend. Hier können Daten aus der Datenbank ausgelesen und eingespeichert werden. 
+Als Schnittstelle an die Datenbank fungiert das Backend. Hier können Daten aus der Datenbank eingespeichert und ausgelesen werden. 
 
 
 &nbsp;
