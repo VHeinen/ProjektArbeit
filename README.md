@@ -1,7 +1,6 @@
 # Projektarbeit von Robin Brang und Viktoria Heinen
 
 ### Agenda 
-- Datenbank
 - Backend
 - Frontend
 - Zusätzliche Features
@@ -11,14 +10,8 @@
 &nbsp;
 
 
-### Datenbank
-Im Hintergrund unserer Notenverwaltung steht eine MySQL Datenbank. Dort werden alle Daten hinterlegt und abgespeichert.
-
-
-&nbsp;
-
-
 ### Backend
+Im Hintergrund unserer Notenverwaltung steht eine MySQL Datenbank. Dort werden alle Daten hinterlegt und abgespeichert.
 Als Schnittstelle an die Datenbank fungiert das Backend. Hier können Daten aus der Datenbank eingespeichert und ausgelesen werden. 
 Zum Verbinden der Datenbank und unserem Java-Projekt verwenden wir den JDBC Driver.
 
