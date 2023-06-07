@@ -20,7 +20,7 @@ Zum Verbinden der Datenbank und unserem Java-Projekt verwenden wir den JDBC Driv
 
 
 ### Frontend
-Für das UI/UX verwenden wir Java Swing. Es ermöglicht die grafische Darstellung und die Handhabung des Backends un der Daten. 
+Für das UI/UX verwenden wir Java Swing. Es ermöglicht die grafische Darstellung und die Handhabung des Backends seiner der Daten. 
  
 
 &nbsp;
