@@ -46,4 +46,4 @@ Für das UI/UX verwenden wir Java Swing. Es ermöglicht die grafische Darstellun
 
 ![datamodell_Projektarbeit.png](./datamodell_Projektarbeit.png)
 
-![Datenmodell_Projektarbeit.png](./Datenmodell_Projektarbeit.png)
+
