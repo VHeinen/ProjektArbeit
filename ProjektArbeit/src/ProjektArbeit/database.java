@@ -11,11 +11,30 @@ import java.sql.Statement;
 
 public class database {
 	
-	  static String myDriver = "com.mysql.cj.jdbc.Driver";
-      static String url = "jdbc:mysql://localhost:3306/Projektarbeit";
-      static String user = "root"; 
-      static String pw = "test"; 
+    private static String myDriver = "com.mysql.cj.jdbc.Driver";
+    private static String url = "jdbc:mysql://localhost:3306/Projektarbeit";
+    private static String user = "root";
+    private static String pw = "test";
+    private static Connection conn; // Add this line to store the connection
 
+      
+  	public static Connection connectToDatabase(String myDriver, String url, String user, String pw) throws ClassNotFoundException, SQLException {
+
+  		Class.forName(myDriver);
+  	    conn = DriverManager.getConnection(url, user, pw);
+  	    return conn;   
+
+	}
+  	
+	public static void closeConnection() {
+	    try {
+	        if (conn != null && !conn.isClosed()) {
+	            conn.close();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
       
 	public static void writePupilInDatabase(int id, String firstName, String lastName, int classID) {
 		
@@ -251,8 +270,6 @@ public class database {
 		return resultArray;
 	}
 	
-	
-	
 	public static int getAmountOfIDsByTableName(String tablename) throws ClassNotFoundException, SQLException {
 			
 			String query = "select count(id) from " + tablename;
@@ -401,16 +418,5 @@ public class database {
         preparedStm.executeUpdate();
         conn.close();
         
-	}
-	
-		
-	
-	public static Connection connectToDatabase(String myDriver, String url, String user, String pw) throws ClassNotFoundException, SQLException {
-
-	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(url, user, pw);
-	      
-	      return conn;    
-
 	}
 }
