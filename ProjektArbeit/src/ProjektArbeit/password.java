@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Connection;
 
 
 public class password {
@@ -57,26 +58,32 @@ public class password {
 				String pupilQuery = "select userName, passwort, pupilID from pupilmanagement where passwort = '" + passwordEntry + "' and userName = '" + usernameEntry + "'";
 				
 				try {
+					Connection connection = databaseHandler.getConnection();
 					String[] teacherArr = database.getDataFromDatabase(teacherQuery, 3);
 					String[] pupilArr = database.getDataFromDatabase(pupilQuery, 3);
+					databaseHandler.closeConnection();
 					if(teacherArr[0] != null && teacherArr[1] != null) {
 						teacher = true;
 						userID = Integer.parseInt(teacherArr[2]);
-						swing.main(args, teacher, userID);
+						swing.buildJFrame(teacher, userID);
 						passwordWindow.dispose();
+						System.out.println("if");
 					}
 					else if(pupilArr[0] != null && pupilArr[1] != null) {
 						teacher = false;
 						userID = Integer.parseInt(pupilArr[2]);
 						pupil.main(args, teacher, userID);
 						passwordWindow.dispose();
+						System.out.println("else if");
 					}
 					else {
 						teacher = false;
 						System.out.println("Username oder Passwort falsch");
+						System.out.println("else");
 					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
+					database.closeConnection();
 				}
 			}
 		});
