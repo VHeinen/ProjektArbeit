@@ -21,9 +21,9 @@ public class swing {
 	private static String subject;
 	private static String pupil;
 	
-	public static void main(String[] args, boolean teacher, int userID) throws ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		//JFrame erstellen, Button+Logik inklusive
-		window = buildJFrame(teacher, userID);
+		buildJFrame(true, 2);
 	}
 	
 	public static JFrame buildJFrame(boolean teacher, int userID) throws ClassNotFoundException, SQLException {
@@ -56,15 +56,13 @@ public class swing {
 		dropdownClassBox.add(dropdownClassLabel);
 		final JComboBox<String> dropdownClassCB = new JComboBox<String>(choicesClasses);
 		dropdownClassBox.add(dropdownClassCB);
-		JButton buttonDropdownClass = new JButton("OK");
-		buttonDropdownClass.addActionListener(new ActionListener() {
+		dropdownClassCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownClass wurde gewählt");
 				initSchoolClass(dropdownClassCB);
 				//TODO Notenart an Klasse fest machen -> Dropdown Menu 1+ bis 6 ODER eingabefenster Integer
 			}
 		});
-		dropdownClassBox.add(buttonDropdownClass);
 		
 		//Dropdownmenu Fächer
 		String[] choicesSubject = queries.getSubjectNamesByTeacherID(userID);
@@ -72,24 +70,21 @@ public class swing {
 		dropdownSubjectBox.add(dropdownSubjectLabel);
 		final JComboBox<String> dropdownSubjectCB = new JComboBox<String>(choicesSubject);
 		dropdownSubjectBox.add(dropdownSubjectCB);
-		JButton buttonDropdownSubject = new JButton("OK");
-		buttonDropdownSubject.addActionListener(new ActionListener() {
+		dropdownSubjectCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownSubject wurde gewählt");
 				initSubject(dropdownSubjectCB);
 			}
 		});
-		dropdownSubjectBox.add(buttonDropdownSubject);
 		
 		
 		//Dropdownmenu Schüler
-		String[] choicesStudents = queries.getPupilsFromPupilByClassID(schoolClass);
-		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus und klicke OK ");
+		String[] choicesStudents = queries.getPupilsFromPupil();
+		JLabel dropdownStudentsLabel = new JLabel("Wähle einen Schüler aus");
 		dropdownStudentsBox.add(dropdownStudentsLabel);
 		final JComboBox<String> dropdownStudentsCB = new JComboBox<String>(choicesStudents);
 		dropdownStudentsBox.add(dropdownStudentsCB);
-		JButton buttonDropdownStudents = new JButton("OK");
-		buttonDropdownStudents.addActionListener(new ActionListener() {
+		dropdownStudentsCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
 				initStudent(dropdownStudentsCB);
@@ -97,7 +92,6 @@ public class swing {
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
-		dropdownStudentsBox.add(buttonDropdownStudents);
 		
 		//Überschriftenabschnitt
 		JLabel headlines = new JLabel("Note                                                                                     Gewichtung                                                                  Kommentar                                             ");
