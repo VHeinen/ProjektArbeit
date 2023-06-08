@@ -19,28 +19,35 @@ public class queries {
 	
 	public static String[] getNamesFromSchoolClass() throws ClassNotFoundException, SQLException {
 		String classQuery = "select name from schoolclass";
-		String[] resultArr = database.getDataFromDatabase(classQuery, 2);
+		String[] resultArr = database.getDataFromDatabase(classQuery, 1);
 		return resultArr;
 	}
 	
 	public static String[] getSubjectNamesByTeacherID(int userID) throws ClassNotFoundException, SQLException {
-		String classQuery = "select firstSubjectID, secondSubjectID, thirdSubjectID from teacher  id = '" + userID + "'";
+		String classQuery = "select firstSubjectID, secondSubjectID, thirdSubjectID from teacher where id = '" + userID + "'";
 		String[] resultArr = database.getDataFromDatabase(classQuery, 3);
-		classQuery = "select name from subject where id = '" + resultArr[0] + "' or id = '" + resultArr[1] + "' or id = '" + resultArr[2] + "'";
-		resultArr = database.getDataFromDatabase(classQuery, 3);
+		classQuery = "select name from subject where id = '" + resultArr[0] + "'";
+		String[]resultArr1 = database.getDataFromDatabase(classQuery, 1);
+		classQuery = "select name from subject where id = '" + resultArr[1] + "'";
+		String[]resultArr2 = database.getDataFromDatabase(classQuery, 1);
+		classQuery = "select name from subject where id = '" + resultArr[2] + "'";
+		String[]resultArr3 = database.getDataFromDatabase(classQuery, 1);
+		resultArr[0] = resultArr1[0];
+		resultArr[1] = resultArr2[0];
+		resultArr[2] = resultArr3[0];
 		return resultArr;
 	}
 	
-	public static String[] getPupilsFromPupilByClassID(String schoolClass) throws NumberFormatException, ClassNotFoundException, SQLException {
-		String classQuery = "select id from schoolclass where name = '" + schoolClass + "'";
-		int id = Integer.parseInt(database.getDataFromDatabase(classQuery, 1)[0]);
-		String pupilQuery = "select firstName, lastName from pupil where classID = " + id;
-		String[] resultArr = database.getDataFromDatabase(classQuery, 100);
-		String[] returnArr = new String[50];
-		int j = 0;
-		for(int i = 0; i < 100; i++) {
-			returnArr[i] = resultArr[j] + resultArr[j+1];
-			j += 2;
+	public static String[] getPupilsFromPupil() throws NumberFormatException, ClassNotFoundException, SQLException {
+		String query = "select count(id) from pupil";
+		String[] countStr = database.getDataFromDatabase(query, 1);
+		int count = Integer.parseInt(countStr[0]);
+		String[] resultArr = new String[2];
+		String[] returnArr = new String[count];
+		for(int i = 0; i < count; i++) {
+			String pupilQuery = "select firstName, lastName from pupil where id = '" + i + "'";
+			resultArr = database.getDataFromDatabase(pupilQuery, 2);
+			returnArr[i] = resultArr[0] + " " + resultArr[1];
 		}
 		return returnArr;
 	}
