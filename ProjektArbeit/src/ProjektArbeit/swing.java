@@ -2,7 +2,9 @@ package ProjektArbeit;
 
 import java.awt.Color;
 import java.io.*;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.*;
@@ -11,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class swing {  
 	
@@ -38,6 +41,7 @@ public class swing {
 		JLabel puffer2 = new JLabel(" "); 
 		JLabel puffer3 = new JLabel(" "); 
 		JLabel puffer4 = new JLabel(" ");
+		JLabel grades = new JLabel("");
 		
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
@@ -88,13 +92,13 @@ public class swing {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DropDownStudents wurde gewählt");
 				initStudent(dropdownStudentsCB);
-				currentGrade = calculateCurrentGrade(pupil);
+//				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		
 		//Überschriftenabschnitt
-		JLabel headlines = new JLabel("Note                                                                                     Gewichtung                                                                  Kommentar                                             ");
+		JLabel headlines = new JLabel("Note                                                                                                             Kommentar                                                                                                                ");
 		
 		//Klassenarbeitsabschnitt
 		JLabel exam = new JLabel("Klassenarbeit:  ");
@@ -102,9 +106,9 @@ public class swing {
 		JTextField examGradeInputField = new JTextField("", 15);
 		examGradeInputField.setForeground(Color.BLUE);
 		examBox.add(examGradeInputField);
-		JTextField examWeightingInputField = new JTextField("", 15);
-		examWeightingInputField.setForeground(Color.BLUE);
-		examBox.add(examWeightingInputField);
+//		JTextField examWeightingInputField = new JTextField("", 15);
+//		examWeightingInputField.setForeground(Color.BLUE);
+//		examBox.add(examWeightingInputField);
 		JTextField examCommentInputField = new JTextField("", 15);
 		examCommentInputField.setForeground(Color.BLUE);
 		examBox.add(examCommentInputField);
@@ -114,10 +118,18 @@ public class swing {
 		buttonExams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String gradeToken = examGradeInputField.getText();
-				float weightingToken = Float.parseFloat(examWeightingInputField.getText());
+//				float weightingToken = Float.parseFloat(examWeightingInputField.getText());
 				String commentToken = examCommentInputField.getText();
-				dbUpdateGrade(gradeToken, weightingToken, commentToken);
-				currentGrade = calculateCurrentGrade(pupil);
+				try {
+					dbInsertGrade(gradeToken, commentToken, "Klassenarbeit");
+				} catch (ClassNotFoundException e1) {
+					
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}	//weightingToken entfernt
+//				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
@@ -129,9 +141,9 @@ public class swing {
 		JTextField epoGradeInputField = new JTextField("", 15);
 		epoGradeInputField.setForeground(Color.BLUE);
 		epoBox.add(epoGradeInputField);
-		JTextField epoWeightingInputField = new JTextField("", 15);
-		epoWeightingInputField.setForeground(Color.BLUE);
-		epoBox.add(epoWeightingInputField);
+//		JTextField epoWeightingInputField = new JTextField("", 15);
+//		epoWeightingInputField.setForeground(Color.BLUE);
+//		epoBox.add(epoWeightingInputField);
 		JTextField epoCommentInputField = new JTextField("", 15);
 		epoCommentInputField.setForeground(Color.BLUE);
 		epoBox.add(epoCommentInputField);
@@ -141,10 +153,18 @@ public class swing {
 		buttonEpos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String gradeToken = epoGradeInputField.getText();
-				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
+//				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
-				dbUpdateGrade(gradeToken, weightingToken, commentToken);
-				currentGrade = calculateCurrentGrade(pupil);
+				try {
+					dbInsertGrade(gradeToken, commentToken, "Epochalnote");
+				} catch (ClassNotFoundException e1) {
+					
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}	//weightingToken entfernt
+//				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
@@ -156,9 +176,9 @@ public class swing {
 		JTextField otherGradeInputField = new JTextField("", 15);
 		otherGradeInputField.setForeground(Color.BLUE);
 		otherBox.add(otherGradeInputField);
-		JTextField otherWeightingInputField = new JTextField("", 15);
-		otherWeightingInputField.setForeground(Color.BLUE);
-		otherBox.add(otherWeightingInputField);
+//		JTextField otherWeightingInputField = new JTextField("", 15);
+//		otherWeightingInputField.setForeground(Color.BLUE);
+//		otherBox.add(otherWeightingInputField);
 		JTextField otherCommentInputField = new JTextField("", 15);
 		otherCommentInputField.setForeground(Color.BLUE);
 		otherBox.add(otherCommentInputField);
@@ -168,22 +188,47 @@ public class swing {
 		buttonOthers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String gradeToken = epoGradeInputField.getText();
-				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
+//				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
 				String commentToken = epoCommentInputField.getText();
-				dbUpdateGrade(gradeToken, weightingToken, commentToken);
-				currentGrade = calculateCurrentGrade(pupil);
+				try {
+					dbInsertGrade(gradeToken, commentToken, commentToken);
+				} catch (ClassNotFoundException e1) {
+					
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}	//weightingToken entfernt
+//				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
 			}
 		});
 		footerBox.add(buttonOthers);
 		
-		//TODO: Notenausgabe Button
-		JButton buttonShowGrades = new JButton("alle Noten mitsamt Gewichtung und Kommentaren anzeigen");
+		JButton buttonShowGrades = new JButton("alle Noten anzeigen");
 		buttonShowGrades.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: select auf alle nötigen Infos machen, alles in einen String packen, den String in ein Label packen und das Label ganz unten in die Vert Box hängen
-			}
-		});
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder html = new StringBuilder("<html><body>");
+
+                ArrayList<String> gradeList = new ArrayList<>();
+				try {
+					gradeList = queries.getGradeTypeDateTeacherSubjectByPupilId(Integer.parseInt(queries.getIdFromPupilByName(getPupilName())[0]));
+				} catch (NumberFormatException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+                
+                // Generate HTML string dynamically based on grades
+                for (String grade : gradeList) {
+                    html.append(grade).append("<br>");
+                }
+                html.append("</body></html>");
+                grades.setText(html.toString());
+            }
+        });
 		statisticsButtonsBox.add(buttonShowGrades);
 		
 		//TODO: Zeugnis Ausgabe Button
@@ -210,6 +255,7 @@ public class swing {
 		vert.add(currentGradeLabel);
 		vert.add(puffer4);
 		vert.add(statisticsButtonsBox);
+		vert.add(grades);
 		pane.add(vert);
 		
 		//JFrame fertigmachen
@@ -219,19 +265,19 @@ public class swing {
 		return(window);
 	}
 	
-	public static String calculateCurrentGrade(String pupil) {
-		int gradeCount = 5; //TODO select count -> wie viele noten sind eingetragen
-		double grade = 0.0; double gradeToken;
-		int weighting, length;
-		for(int i = 0; i < gradeCount; i++) {
-			gradeToken = 12; //TODO select grade(i) eventuell for schleife durch select schleife ersetzen
-			weighting = 20; //TODO select
-			grade = grade + gradeToken * weighting;
-		}
-		grade = grade / 100;
-		String ret = pupil + " aus der " + schoolClass + " hat derzeit " + grade + " Punkte in " + subject;
-		return(ret);
-	}
+//	public static String calculateCurrentGrade(String pupil) {
+//		int gradeCount = 5;
+//		double grade = 0.0; double gradeToken;
+//		int weighting, length;
+//		for(int i = 0; i < gradeCount; i++) {
+//			gradeToken = 12;
+//			weighting = 20;
+//			grade = grade + gradeToken * weighting;
+//		}
+//		grade = grade / 100;
+//		String ret = pupil + " aus der " + schoolClass + " hat derzeit " + grade + " Punkte in " + subject;
+//		return(ret);
+//	}
 	
 	public static void initStudent(JComboBox dropdownStudentsCB) {
 		pupil = (String)dropdownStudentsCB.getSelectedItem();
@@ -245,8 +291,20 @@ public class swing {
 		schoolClass = (String)dropdownClassesCB.getSelectedItem();
 	}
 	
-	public static void dbUpdateGrade(String grade, float weighting, String comment) {
-		//TODO: Notenumwandlung (1- -> 13 etc.)
-		//TODO: DB Update Tokens
+	public static void dbInsertGrade(String grade, String comment, String type) throws ClassNotFoundException, SQLException {	//float weighting entfernt
+		Date date = new Date(System.currentTimeMillis());
+		String query = "select count(id) from grade";
+		String[] countStr = database.getDataFromDatabase(query, 1);
+		int id = Integer.parseInt(countStr[0]);
+		int pupilID = Integer.parseInt(queries.getIdFromPupilByName(getPupilName())[0]);
+		int subjectID = Integer.parseInt(queries.getIdFromSubjectByName(subject)[0]);
+		database.writeGradeInDatabase(id, Integer.parseInt(grade), 1.0f,  type, date, pupilID, password.userID, subjectID);
 	}
+	
+	public static String[] getPupilName() {
+	    String[] nameParts = pupil.split(" ");
+	    return nameParts;
+	}
+
+	
 }
