@@ -1,6 +1,7 @@
 package ProjektArbeit;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -269,6 +270,34 @@ public class database {
 		
 		return resultArray;
 	}
+	
+	public static String[][] getAllDataFromDatabase(String query, int length) throws ClassNotFoundException, SQLException {
+	    Connection conn = connectToDatabase(myDriver, url, user, pw);
+	    Statement stm = conn.createStatement();
+	    ResultSet resultS = stm.executeQuery(query);
+
+	    ArrayList<String[]> resultList = new ArrayList<>();
+
+	    while (resultS.next()) {
+	        String[] row = new String[length];
+	        for (int i = 1; i <= length; i++) {
+	            row[i - 1] = resultS.getString(i);
+	        }
+	        resultList.add(row);
+	    }
+
+	    resultS.close();
+	    stm.close();
+
+	    // Convert ArrayList to 2D array
+	    String[][] resultArray = new String[resultList.size()][length];
+	    for (int i = 0; i < resultList.size(); i++) {
+	        resultArray[i] = resultList.get(i);
+	    }
+
+	    return resultArray;
+	}
+
 	
 	public static int getAmountOfIDsByTableName(String tablename) throws ClassNotFoundException, SQLException {
 			
