@@ -94,8 +94,14 @@ public class queries {
 	}
 	
 	public static String[] getIdFromSubjectByName(String name) throws ClassNotFoundException, SQLException {
-		String query = "select id from subject where name = " + name;
+		String query = "select id from subject where name = '" + name + "'";
 		String[] resultArr = database.getDataFromDatabase(query, 1);
 		return resultArr;
 	}
+	
+	public static String[] getNameFromPupilByID(int userID) throws ClassNotFoundException, SQLException {
+		String query = "SELECT firstName, lastName FROM pupil WHERE id = '" + userID + "'";
+		return(database.getDataFromDatabase(query, 2));
+	}
+	
 }
