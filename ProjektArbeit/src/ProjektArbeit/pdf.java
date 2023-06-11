@@ -49,6 +49,7 @@ public class pdf {
 			String query = "select * from " + tableName + " where id = " + row_count;
 			
 			String[] queryResult = database.getDataFromDatabase(query, amountOfColumns);
+			System.out.println(queryResult[0]);
 					
 			row = table.getRows().add();
 			
@@ -268,8 +269,8 @@ public class pdf {
 		textF.setHorizontalAlignment(HorizontalAlignment.Center);
 		textF.setVerticalAlignment(VerticalAlignment.Top);
 		
-		textF.getTextState().setFontSize(10f);
-		textF.getTextState().setForegroundColor(Color.getMidnightBlue());
+//		textF.getTextState().setFontSize(10f);
+//		textF.getTextState().setForegroundColor(Color.getMidnightBlue());
 		
 		page.getParagraphs().add(textF);
 		
