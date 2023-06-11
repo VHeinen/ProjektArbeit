@@ -72,7 +72,7 @@ public class password {
 					else if(pupilArr[0] != null && pupilArr[1] != null) {
 						teacher = false;
 						userID = Integer.parseInt(pupilArr[2]);
-						pupil.main(args, teacher, userID);
+						pupil.main(args);
 						passwordWindow.dispose();
 						System.out.println("else if");
 					}
