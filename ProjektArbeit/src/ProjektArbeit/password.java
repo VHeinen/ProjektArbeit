@@ -34,6 +34,7 @@ public class password {
 		Box hor2 = Box.createHorizontalBox();
 		passwordWindow.setSize(500, 200);
 		JLabel topLabel = new JLabel("Gib deinen Nutzernamen und dein Passwort ein: ");
+		JLabel wrongInput = new JLabel("");
 		vert.add(topLabel);
 		JLabel passwordLabel = new JLabel("Nutzername: ");
 		JPasswordField username = new JPasswordField("");
@@ -78,8 +79,7 @@ public class password {
 					}
 					else {
 						teacher = false;
-						System.out.println("Username oder Passwort falsch");
-						System.out.println("else");
+						wrongInput.setText("Benutzername oder Passwort falsch");
 					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
@@ -90,6 +90,7 @@ public class password {
 		vert.add(hor1);
 		vert.add(hor2);
 		vert.add(button);
+		vert.add(wrongInput);
 		pane.add(vert);
 		passwordWindow.add(pane);
 		passwordWindow.setVisible(true);
