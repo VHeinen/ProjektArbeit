@@ -1,6 +1,8 @@
 package ProjektArbeit;
 
 import java.awt.Color;
+import com.aspose.pdf.Document;
+import com.aspose.pdf.Page;
 import java.io.*;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -33,15 +35,15 @@ public class swing {
 		
 		//JFrame aufbauen
 		window = new JFrame();
-		window.setTitle("Notenübersicht");
+		window.setTitle("Notenübersicht - Lehrer");
 		window.setSize(1080, 1920);
 		JPanel pane = new JPanel();
 		JLabel currentGradeLabel = new JLabel();
-		JLabel puffer1 = new JLabel(" "); 
+		JLabel puffer1 = new JLabel("                                                                                                                                                                                                                                                                           "); 
 		JLabel puffer2 = new JLabel(" "); 
 		JLabel puffer3 = new JLabel(" "); 
 		JLabel puffer4 = new JLabel(" ");
-		JLabel grades = new JLabel("");
+		JLabel grades = new JLabel("                                                                                                                                                                                                                                                                          ");
 		
 		//Boxen zur Anordnung erstellen
 		Box vert = Box.createVerticalBox();
@@ -232,13 +234,19 @@ public class swing {
 		statisticsButtonsBox.add(buttonShowGrades);
 		
 		//TODO: Zeugnis Ausgabe Button
-		JButton buttonPrintCertificate = new JButton("Zeugnis ausgeben");
-		buttonPrintCertificate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: selecte alle Infos aus der Datenbank anhand von pupil und erstelle eine hübsche PDF-Datei 
-			}
-		});
-		statisticsButtonsBox.add(buttonPrintCertificate);
+//		JButton buttonPrintCertificate = new JButton("Zeugnis ausgeben");
+//		buttonPrintCertificate.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				try {
+//					createPDF();
+//				} catch (ClassNotFoundException e1) {
+//					e1.printStackTrace();
+//				} catch (SQLException e1) {
+//					e1.printStackTrace();
+//				}
+//			}
+//		});
+//		statisticsButtonsBox.add(buttonPrintCertificate);
 		
 		//Boxen anordnen
 		vert.add(dropdownClassBox);
@@ -306,5 +314,17 @@ public class swing {
 	    return nameParts;
 	}
 
+	public static void createPDF() throws ClassNotFoundException, SQLException {
+		
+		Document document = pdf.document;
+		Page page = pdf.page;
+		
+		page = pdf.setTitleForPDF(page);
+		
+		String query;
+		query = "select grade, type, date from grade where id = '" + password.userID + "'";
+		document = pdf.createTableForPDFByQuery(document, query, 3);
+		pdf.saveDocument(document, "Notenübersicht.pdf");
+	}
 	
 }
