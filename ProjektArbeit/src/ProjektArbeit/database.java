@@ -336,7 +336,7 @@ public class database {
 		
 	}
 	
-	public static String[] getcolumnNamesByTableName(String tablename) {
+	public static String[] getColumnNamesByTableName(String tablename) {
 	
 	
 		
