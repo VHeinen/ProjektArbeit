@@ -38,7 +38,7 @@ public class pdf {
 		int amountOfIDs = database.getAmountOfIDsByTableName(tableName);
 		int amountOfColumns = database.getAmountOfColumnsByTableName(tableName);		
 		
-		String[] columnNames = database.getcolumnNamesByTableName(tableName);	
+		String[] columnNames = database.getColumnNamesByTableName(tableName);	
 		
 		table = adjustTableByTableName(table, tableName);
 		page = setTitleForTable(page, tableName);
