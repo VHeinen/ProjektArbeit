@@ -124,6 +124,7 @@ public class swing {
 				String commentToken = examCommentInputField.getText();
 				try {
 					dbInsertGrade(gradeToken, commentToken, "Klassenarbeit");
+					System.out.println("Klassenarbeit wurde gespeichert");
 				} catch (ClassNotFoundException e1) {
 					
 					e1.printStackTrace();
@@ -133,6 +134,8 @@ public class swing {
 				}	//weightingToken entfernt
 //				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
+				examGradeInputField.setText("");
+				examCommentInputField.setText("");
 			}
 		});
 		footerBox.add(buttonExams);
@@ -159,6 +162,7 @@ public class swing {
 				String commentToken = epoCommentInputField.getText();
 				try {
 					dbInsertGrade(gradeToken, commentToken, "Epochalnote");
+					System.out.println("Epochalnote wurde gespeichert");
 				} catch (ClassNotFoundException e1) {
 					
 					e1.printStackTrace();
@@ -168,6 +172,8 @@ public class swing {
 				}	//weightingToken entfernt
 //				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
+				epoGradeInputField.setText("");
+				epoCommentInputField.setText("");
 			}
 		});
 		footerBox.add(buttonEpos);
@@ -189,11 +195,12 @@ public class swing {
 		JButton buttonOthers = new JButton("andere Note speichern");
 		buttonOthers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String gradeToken = epoGradeInputField.getText();
+				String gradeToken = otherGradeInputField.getText();
 //				float weightingToken = Float.parseFloat(epoWeightingInputField.getText());
-				String commentToken = epoCommentInputField.getText();
+				String commentToken = otherGradeInputField.getText();
 				try {
-					dbInsertGrade(gradeToken, commentToken, commentToken);
+					dbInsertGrade(gradeToken, commentToken, "Andere Note");
+					System.out.println("Andere Note wurde gespeichert");
 				} catch (ClassNotFoundException e1) {
 					
 					e1.printStackTrace();
@@ -203,6 +210,8 @@ public class swing {
 				}	//weightingToken entfernt
 //				currentGrade = calculateCurrentGrade(pupil);
 				currentGradeLabel.setText(currentGrade);
+				otherGradeInputField.setText("");
+				otherGradeInputField.setText("");
 			}
 		});
 		footerBox.add(buttonOthers);
