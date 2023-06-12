@@ -3,19 +3,23 @@ Projekt Abgabe: Montag 12.06 23:59!!!!
 Trello: https://trello.com/b/gwa6QK89/lf5-it-22a-java-notenverwaltung
 MySql Workspace: C:\ProgramData\MySQL\MySQL Server 8.0\Data -> ist ein versteckter Ordner 
 
-Java Swing Infos: https://www.javatpoint.com/java-swing
-Eclipse Datei in Classpath: https://praxistipps.chip.de/classpath-in-eclipse-setzen-so-gehts_98052
 
 Download .jar for pdf: https://releases.aspose.com/pdf/java/23-5/#package-explorer 
 -> download for jdk 17 
 
-pdf Docus:
+
+- Info Material -
+Eclipse Datei in Classpath:
+- https://praxistipps.chip.de/classpath-in-eclipse-setzen-so-gehts_98052
+
+JDBC:
+- https://alvinalexander.com/java/java-mysql-insert-example-preparedstatement/
+- https://www.baeldung.com/jdbc-resultset
+
+Java Swing:
+- https://www.javatpoint.com/java-swing
+- https://www.edureka.co/blog/java-swing/
+
+Aspose:
 - https://blog.aspose.com/de/pdf/create-pdf-files-in-java/
 - https://docs.aspose.com/pdf/java/basics-of-dom-api/
-
-
-
-Weitere Ideen - Umsetzungen:
-- Weighting anpassen!
-- Klassenlehrer pro Klassen zuweisen?
-- Schüler-/Lehrer-Sicht
