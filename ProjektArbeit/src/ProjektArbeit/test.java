@@ -12,7 +12,7 @@ public class test {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 
-	// - How to inserate in database - 
+	// - How to inserate Data into database - 
 		
 //		database.writeSubjectInDatabase(0, "LF1");
 //		database.writeSubjectInDatabase(1, "Englisch");
